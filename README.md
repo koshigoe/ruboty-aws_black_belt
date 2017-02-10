@@ -21,7 +21,28 @@ Or install it yourself as:
 ## Usage
 
 ```
+ruboty /awsbb config\z/ - Show configuration
 ruboty /awsbb list/ - Show AWS Black Belt schedule
+ruboty /awsbb register (?<url>.*)/ - Register webinar
+ruboty /awsbb configure\n(.*)\z/m - Configure personal informations to register webinar
+```
+
+### Configuration
+
+```
+電子メールアドレス =
+名 =
+姓 =
+国 =
+郵便番号 =
+勤務先お電話番号 =
+御社名・所属団体名 =
+お役職 =
+業種 =
+職種 =
+AWS 利用度 =
+クラウド導入の予定はいつですか？ =
+オンラインセミナー後、AWS の日本担当チームからご連絡させていただいてもよろしいですか =
 ```
 
 ## Development
