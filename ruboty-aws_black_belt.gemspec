@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "ruboty", "~> 1.3.0"
   spec.add_dependency "nokogiri", "~> 1.7.0.1"
+  spec.add_dependency "mechanize", "~> 2.7.5"
 end

@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
+require 'mechanize'
 
 module Ruboty
   module Handlers
@@ -9,6 +10,7 @@ module Ruboty
       on /awsbb list/, name: 'show_schedule', description: 'Show AWS Black Belt schedule'
       on /awsbb config\z/, name: 'show_configuration', description: 'Show configuration'
       on /awsbb configure\n(.*)\z/m, name: 'configure', description: 'Configure personal informations to register webinar'
+      on /awsbb register (?<url>.*)/, name: 'register', description: 'Register webinar'
 
       FORM = {
         '電子メールアドレス' => 'login',
@@ -44,6 +46,26 @@ module Ruboty
         config = Hash[message[1].split("\n").map { |line| line.split("=", 2).map(&:strip) }]
         robot.brain.data[BRAIN_KEY][message.from_name] = config
         message.reply('done.')
+      end
+
+      def register(message)
+        agent = Mechanize.new
+        page = agent.get(message['url'])
+        page = page.link_with(text: 'オンラインセミナーお申込み').click
+
+        form = page.form_with(id: 'eventReg')
+        config = configuration(message.from_name)
+        FORM.each do |label, name|
+          form[name] = config[label]
+        end
+        page = agent.submit(form)
+
+        if page.uri.to_s.start_with?('https://publish.awswebcasts.com/content/connect/connect-action')
+          message.reply('registered. check your mailbox.')
+        else
+          # TODO: use poltergeist to capture screenshot
+          message.reply('something wrong...')
+        end
       end
 
       private
