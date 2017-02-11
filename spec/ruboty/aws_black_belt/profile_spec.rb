@@ -31,7 +31,7 @@ RSpec.describe Ruboty::AwsBlackBelt::Profile do
         x.business = 'ソフトウェア & インターネット'
         x.job = '開発者/エンジニア'
         x.usage = 'AWSでサービスを複数本番稼動させている'
-        x.schedule = ' 未定'
+        x.schedule = '未定'
         x.contact = 'false'
       end
     end
@@ -49,7 +49,7 @@ RSpec.describe Ruboty::AwsBlackBelt::Profile do
         'business' => 'ソフトウェア & インターネット',
         'job' => '開発者/エンジニア',
         'usage' => 'AWSでサービスを複数本番稼動させている',
-        'schedule' => ' 未定',
+        'schedule' => '未定',
         'contact' => 'false',
       }
       is_expected.to eq expected
@@ -73,7 +73,7 @@ RSpec.describe Ruboty::AwsBlackBelt::Profile do
         'business' => 'ソフトウェア & インターネット',
         'job' => '開発者/エンジニア',
         'usage' => 'AWSでサービスを複数本番稼動させている',
-        'schedule' => ' 未定',
+        'schedule' => '未定',
         'contact' => 'false',
       }
     end
@@ -92,7 +92,7 @@ RSpec.describe Ruboty::AwsBlackBelt::Profile do
       expect(profile.business).to eq('ソフトウェア & インターネット')
       expect(profile.job).to eq('開発者/エンジニア')
       expect(profile.usage).to eq('AWSでサービスを複数本番稼動させている')
-      expect(profile.schedule).to eq(' 未定')
+      expect(profile.schedule).to eq('未定')
       expect(profile.contact).to eq('false')
     end
   end

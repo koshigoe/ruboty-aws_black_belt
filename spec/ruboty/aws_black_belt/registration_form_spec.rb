@@ -19,7 +19,7 @@ RSpec.describe Ruboty::AwsBlackBelt::RegistrationForm do
         x.business = 'ソフトウェア & インターネット'
         x.job = '開発者/エンジニア'
         x.usage = 'AWSでサービスを複数本番稼動させている'
-        x.schedule = ' 未定'
+        x.schedule = '未定'
         x.contact = 'false'
       end
     end
