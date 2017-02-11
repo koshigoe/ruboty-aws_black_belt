@@ -163,8 +163,8 @@ EOF
         expect_any_instance_of(Ruboty::AwsBlackBelt::RegistrationForm).to receive(:submit).and_raise(Ruboty::AwsBlackBelt::RegistrationForm::LandingPageNotFound)
       end
 
-      it 'say "something wrong..."' do
-        expect(robot).to receive(:say).with(hash_including(body: 'something wrong...'))
+      it 'say "landing page not found."' do
+        expect(robot).to receive(:say).with(hash_including(body: 'landing page not found.'))
         subject
       end
     end
@@ -174,8 +174,8 @@ EOF
         expect_any_instance_of(Ruboty::AwsBlackBelt::RegistrationForm).to receive(:submit).and_raise(Ruboty::AwsBlackBelt::RegistrationForm::RegistrationPageNotFound)
       end
 
-      it 'say "something wrong..."' do
-        expect(robot).to receive(:say).with(hash_including(body: 'something wrong...'))
+      it 'say "registration page not found."' do
+        expect(robot).to receive(:say).with(hash_including(body: 'registration page not found.'))
         subject
       end
     end
@@ -185,8 +185,8 @@ EOF
         expect_any_instance_of(Ruboty::AwsBlackBelt::RegistrationForm).to receive(:submit).and_return(false)
       end
 
-      it 'say "something wrong..."' do
-        expect(robot).to receive(:say).with(hash_including(body: 'something wrong...'))
+      it 'say "Could not registered. Maybe, you have already registerd."' do
+        expect(robot).to receive(:say).with(hash_including(body: 'Could not registered. Maybe, you have already registerd.'))
         subject
       end
     end

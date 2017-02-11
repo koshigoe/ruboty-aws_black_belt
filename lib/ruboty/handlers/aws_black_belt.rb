@@ -42,9 +42,13 @@ module Ruboty
           message.reply('registered. check your mailbox.')
         else
           # TODO: show screenshot
-          message.reply('something wrong...')
+          message.reply('Could not registered. Maybe, you have already registerd.')
         end
-      rescue Ruboty::AwsBlackBelt::RegistrationForm::Error
+      rescue Ruboty::AwsBlackBelt::RegistrationForm::LandingPageNotFound
+        message.reply('landing page not found.')
+      rescue Ruboty::AwsBlackBelt::RegistrationForm::RegistrationPageNotFound
+        message.reply('registration page not found.')
+      rescue
         # TODO: show screenshot
         message.reply('something wrong...')
       end
