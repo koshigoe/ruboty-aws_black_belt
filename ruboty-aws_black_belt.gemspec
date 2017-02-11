@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock", "~> 2.3.2"
 
   spec.add_dependency "ruboty", "~> 1.3.0"
+  spec.add_dependency "i18n", "~> 0.8.0"
   spec.add_dependency "nokogiri", "~> 1.7.0.1"
   spec.add_dependency "mechanize", "~> 2.7.5"
 end
