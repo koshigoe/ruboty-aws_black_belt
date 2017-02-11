@@ -1,0 +1,17 @@
+ja:
+  ruboty:
+    aws_black_belt:
+      profile:
+        email: 電子メールアドレス
+        first_name: 名
+        last_name: 姓
+        country: 国
+        zipcode: 郵便番号
+        phone: 勤務先お電話番号
+        company: 御社名・所属団体名
+        post: お役職
+        business: 業種
+        job: 職種
+        usage: AWS 利用度
+        schedule: クラウド導入の予定はいつですか？
+        contact: オンラインセミナー後、AWS の日本担当チームからご連絡させていただいてもよろしいですか
