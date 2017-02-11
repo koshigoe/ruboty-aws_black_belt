@@ -27,7 +27,9 @@ ruboty /awsbb profile\n(?<profile>.*)\z/m - Save profile
 ruboty /awsbb register (?<url>.*)/ - Register webinar
 ```
 
-### Configuration
+### Profile
+
+To register webinar via Slack bot, you must save profile.
 
 ```
 電子メールアドレス =
