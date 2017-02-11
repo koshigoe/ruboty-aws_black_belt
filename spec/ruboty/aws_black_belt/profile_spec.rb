@@ -15,6 +15,29 @@ RSpec.describe Ruboty::AwsBlackBelt::Profile do
     end
   end
 
+  describe '.reverse_translation_table' do
+    subject { described_class.reverse_translation_table }
+
+    it do
+      expected = {
+        '電子メールアドレス' => 'email',
+        '名' => 'first_name',
+        '姓' => 'last_name',
+        '国' => 'country',
+        '郵便番号' => 'zipcode',
+        '勤務先お電話番号' => 'phone',
+        '御社名・所属団体名' => 'company',
+        'お役職' => 'post',
+        '業種' => 'business',
+        '職種' => 'job',
+        'AWS 利用度' => 'usage',
+        'クラウド導入の予定はいつですか？' => 'schedule',
+        'オンラインセミナー後、AWS の日本担当チームからご連絡させていただいてもよろしいですか' => 'contact',
+      }
+      is_expected.to eq expected
+    end
+  end
+
   describe '#attributes' do
     subject { profile.attributes }
 

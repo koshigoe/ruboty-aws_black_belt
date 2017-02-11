@@ -8,6 +8,10 @@ module Ruboty
         I18n.t(key, scope: 'ruboty.aws_black_belt.profile', default: key.to_s)
       end
 
+      def self.reverse_translation_table
+        PROFILE_KEYS.each_with_object({}) { |k, res| res[t(k)] = k }
+      end
+
       def initialize(username)
         @username = username
       end
