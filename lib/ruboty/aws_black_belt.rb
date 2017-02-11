@@ -1,6 +1,7 @@
 require 'ruboty'
 require 'ruboty/aws_black_belt/version'
 require 'ruboty/aws_black_belt/profile'
+require 'ruboty/aws_black_belt/registration_form'
 require 'ruboty/handlers/aws_black_belt'
 require 'i18n'
 
