@@ -31,7 +31,7 @@ module Ruboty
       def initialize(*args)
         super
 
-        robot.brain.data[BRAIN_KEY] = {}
+        robot.brain.data[BRAIN_KEY] ||= {}
       end
 
       def show_schedule(message)
