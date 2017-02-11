@@ -8,7 +8,7 @@ module Ruboty
       BRAIN_KEY = name
 
       on /awsbb list/, name: 'show_schedule', description: 'Show AWS Black Belt schedule'
-      on /awsbb config\z/, name: 'show_configuration', description: 'Show configuration'
+      on /awsbb profile\z/, name: 'show_profile', description: 'Show profile'
       on /awsbb configure\n(.*)\z/m, name: 'configure', description: 'Configure personal informations to register webinar'
       on /awsbb register (?<url>.*)/, name: 'register', description: 'Register webinar'
 
@@ -38,8 +38,10 @@ module Ruboty
         message.reply(schedule.map { |seminar| "#{seminar[:title]}\n#{seminar[:url]}" }.join("\n"))
       end
 
-      def show_configuration(message)
-        message.reply(configuration(message.from_name).map { |k, v| "#{k} = #{v}" }.join("\n"))
+      def show_profile(message)
+        profile = Ruboty::AwsBlackBelt::ProfileStorage.new(robot).load(message.from_name)
+        reply = profile.attributes.map { |k, v| "#{Ruboty::AwsBlackBelt::Profile.t(k)} = #{v}" }.join("\n")
+        message.reply(reply)
       end
 
       def configure(message)

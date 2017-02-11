@@ -38,4 +38,74 @@ EOF
       subject
     end
   end
+
+  describe '#show_profile' do
+    subject { robot.receive(body: "#{robot.name} awsbb profile", from_name: 'whoami') }
+
+    context 'data not exists' do
+      it 'return blank profile' do
+        profile =<<EOF.chomp
+電子メールアドレス = 
+名 = 
+姓 = 
+国 = 
+郵便番号 = 
+勤務先お電話番号 = 
+御社名・所属団体名 = 
+お役職 = 
+業種 = 
+職種 = 
+AWS 利用度 = 
+クラウド導入の予定はいつですか？ = 
+オンラインセミナー後、AWS の日本担当チームからご連絡させていただいてもよろしいですか = 
+EOF
+        expect(robot).to receive(:say).with(hash_including(body: profile))
+        subject
+      end
+    end
+
+    context 'data exists' do
+      let(:profile) do
+        Ruboty::AwsBlackBelt::Profile.new('whoami').tap do |x|
+          x.email = 'test@example.com'
+          x.first_name = '名'
+          x.last_name = '姓'
+          x.country = '日本'
+          x.zipcode = '123-4567'
+          x.phone = '090-1234-5678'
+          x.company = '株式会社テスト'
+          x.post = '社長'
+          x.business = 'ソフトウェア & インターネット'
+          x.job = '開発者/エンジニア'
+          x.usage = 'AWSでサービスを複数本番稼動させている'
+          x.schedule = '未定'
+          x.contact = 'false'
+        end
+      end
+
+      before do
+        Ruboty::AwsBlackBelt::ProfileStorage.new(robot).save(profile)
+      end
+
+      it 'return stored profile' do
+        profile =<<EOF.chomp
+電子メールアドレス = test@example.com
+名 = 名
+姓 = 姓
+国 = 日本
+郵便番号 = 123-4567
+勤務先お電話番号 = 090-1234-5678
+御社名・所属団体名 = 株式会社テスト
+お役職 = 社長
+業種 = ソフトウェア & インターネット
+職種 = 開発者/エンジニア
+AWS 利用度 = AWSでサービスを複数本番稼動させている
+クラウド導入の予定はいつですか？ = 未定
+オンラインセミナー後、AWS の日本担当チームからご連絡させていただいてもよろしいですか = false
+EOF
+        expect(robot).to receive(:say).with(hash_including(body: profile))
+        subject
+      end
+    end
+  end
 end

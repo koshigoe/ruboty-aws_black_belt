@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Usage
 
 ```
-ruboty /awsbb config\z/ - Show configuration
+ruboty /awsbb profile\z/ - Show configuration
 ruboty /awsbb list/ - Show AWS Black Belt schedule
 ruboty /awsbb register (?<url>.*)/ - Register webinar
 ruboty /awsbb configure\n(.*)\z/m - Configure personal informations to register webinar
