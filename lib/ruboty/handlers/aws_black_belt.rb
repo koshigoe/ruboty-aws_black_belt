@@ -59,23 +59,18 @@ module Ruboty
       end
 
       def register(message)
-        agent = Mechanize.new
-        page = agent.get(message['url'])
-        page = page.link_with(text: 'オンラインセミナーお申込み').click
+        profile = Ruboty::AwsBlackBelt::ProfileStorage.new(robot).load(message.from_name)
+        form = Ruboty::AwsBlackBelt::RegistrationForm.new(message['url'], profile)
 
-        form = page.form_with(id: 'eventReg')
-        config = configuration(message.from_name)
-        FORM.each do |label, name|
-          form[name] = config[label]
-        end
-        page = agent.submit(form)
-
-        if page.uri.to_s.start_with?('https://publish.awswebcasts.com/content/connect/connect-action')
+        if form.submit
           message.reply('registered. check your mailbox.')
         else
-          # TODO: use poltergeist to capture screenshot
+          # TODO: show screenshot
           message.reply('something wrong...')
         end
+      rescue Ruboty::AwsBlackBelt::RegistrationForm::Error
+        # TODO: show screenshot
+        message.reply('something wrong...')
       end
 
       private
@@ -92,13 +87,6 @@ module Ruboty
         end
 
         result
-      end
-
-      def configuration(name)
-        configuration = robot.brain.data[BRAIN_KEY][name]
-        return configuration if configuration
-
-        robot.brain.data[BRAIN_KEY][name] = FORM.keys.each_with_object({}) { |(k, _), obj| obj[k] = nil  }
       end
     end
   end

@@ -152,4 +152,54 @@ EOF
       expect(robot.brain.data['Ruboty::AwsBlackBelt']['whoami']).to eq expected
     end
   end
+
+  describe '#show_schedule' do
+    subject { robot.receive(body: "#{robot.name} awsbb register #{url}") }
+
+    let(:url) { 'http://www.example.com/page' }
+
+    context 'landing page not found' do
+      before do
+        expect_any_instance_of(Ruboty::AwsBlackBelt::RegistrationForm).to receive(:submit).and_raise(Ruboty::AwsBlackBelt::RegistrationForm::LandingPageNotFound)
+      end
+
+      it 'say "something wrong..."' do
+        expect(robot).to receive(:say).with(hash_including(body: 'something wrong...'))
+        subject
+      end
+    end
+
+    context 'registration page not found' do
+      before do
+        expect_any_instance_of(Ruboty::AwsBlackBelt::RegistrationForm).to receive(:submit).and_raise(Ruboty::AwsBlackBelt::RegistrationForm::RegistrationPageNotFound)
+      end
+
+      it 'say "something wrong..."' do
+        expect(robot).to receive(:say).with(hash_including(body: 'something wrong...'))
+        subject
+      end
+    end
+
+    context 'already registered' do
+      before do
+        expect_any_instance_of(Ruboty::AwsBlackBelt::RegistrationForm).to receive(:submit).and_return(false)
+      end
+
+      it 'say "something wrong..."' do
+        expect(robot).to receive(:say).with(hash_including(body: 'something wrong...'))
+        subject
+      end
+    end
+
+    context 'success' do
+      before do
+        expect_any_instance_of(Ruboty::AwsBlackBelt::RegistrationForm).to receive(:submit).and_return(true)
+      end
+
+      it 'submit registration form' do
+        expect(robot).to receive(:say).with(hash_including(body: 'registered. check your mailbox.'))
+        subject
+      end
+    end
+  end
 end
