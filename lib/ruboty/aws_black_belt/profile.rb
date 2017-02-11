@@ -15,6 +15,10 @@ module Ruboty
       def attributes
         PROFILE_KEYS.each_with_object({}) { |k, res| res[k] = self.send(k) }
       end
+
+      def assign_attributes(attrs = {})
+        attrs.slice(*PROFILE_KEYS).each { |k, v| self.send("#{k}=", v) }
+      end
     end
   end
 end
