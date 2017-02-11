@@ -38,19 +38,19 @@ RSpec.describe Ruboty::AwsBlackBelt::Profile do
 
     it 'return profile items' do
       expected = {
-        email: 'test@example.com',
-        first_name: '名',
-        last_name: '姓',
-        country: '日本',
-        zipcode: '123-4567',
-        phone: '090-1234-5678',
-        company: '株式会社テスト',
-        post: '社長',
-        business: 'ソフトウェア & インターネット',
-        job: '開発者/エンジニア',
-        usage: 'AWSでサービスを複数本番稼動させている',
-        schedule: ' 未定',
-        contact: 'false',
+        'email' => 'test@example.com',
+        'first_name' => '名',
+        'last_name' => '姓',
+        'country' => '日本',
+        'zipcode' => '123-4567',
+        'phone' => '090-1234-5678',
+        'company' => '株式会社テスト',
+        'post' => '社長',
+        'business' => 'ソフトウェア & インターネット',
+        'job' => '開発者/エンジニア',
+        'usage' => 'AWSでサービスを複数本番稼動させている',
+        'schedule' => ' 未定',
+        'contact' => 'false',
       }
       is_expected.to eq expected
     end
@@ -62,19 +62,19 @@ RSpec.describe Ruboty::AwsBlackBelt::Profile do
     let(:profile) { described_class.new('whoami') }
     let(:attributes) do
       {
-        email: 'test@example.com',
-        first_name: '名',
-        last_name: '姓',
-        country: '日本',
-        zipcode: '123-4567',
-        phone: '090-1234-5678',
-        company: '株式会社テスト',
-        post: '社長',
-        business: 'ソフトウェア & インターネット',
-        job: '開発者/エンジニア',
-        usage: 'AWSでサービスを複数本番稼動させている',
-        schedule: ' 未定',
-        contact: 'false',
+        'email' => 'test@example.com',
+        'first_name' => '名',
+        'last_name' => '姓',
+        'country' => '日本',
+        'zipcode' => '123-4567',
+        'phone' => '090-1234-5678',
+        'company' => '株式会社テスト',
+        'post' => '社長',
+        'business' => 'ソフトウェア & インターネット',
+        'job' => '開発者/エンジニア',
+        'usage' => 'AWSでサービスを複数本番稼動させている',
+        'schedule' => ' 未定',
+        'contact' => 'false',
       }
     end
 

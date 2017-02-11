@@ -1,7 +1,7 @@
 module Ruboty
   module AwsBlackBelt
     class Profile
-      PROFILE_KEYS = %i(email first_name last_name country zipcode phone company post business job usage schedule contact)
+      PROFILE_KEYS = %w(email first_name last_name country zipcode phone company post business job usage schedule contact)
       attr_accessor :username, *PROFILE_KEYS
 
       def self.t(key)

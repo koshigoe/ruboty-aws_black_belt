@@ -28,19 +28,19 @@ RSpec.describe Ruboty::AwsBlackBelt::ProfileStorage do
       subject
 
       expected = {
-        email: 'test@example.com',
-        first_name: '名',
-        last_name: '姓',
-        country: '日本',
-        zipcode: '123-4567',
-        phone: '090-1234-5678',
-        company: '株式会社テスト',
-        post: '社長',
-        business: 'ソフトウェア & インターネット',
-        job: '開発者/エンジニア',
-        usage: 'AWSでサービスを複数本番稼動させている',
-        schedule: ' 未定',
-        contact: 'false',
+        'email' => 'test@example.com',
+        'first_name' => '名',
+        'last_name' => '姓',
+        'country' => '日本',
+        'zipcode' => '123-4567',
+        'phone' => '090-1234-5678',
+        'company' => '株式会社テスト',
+        'post' => '社長',
+        'business' => 'ソフトウェア & インターネット',
+        'job' => '開発者/エンジニア',
+        'usage' => 'AWSでサービスを複数本番稼動させている',
+        'schedule' => ' 未定',
+        'contact' => 'false',
       }
       expect(robot.brain.data['Ruboty::AwsBlackBelt']['whoami']).to eq expected
     end
@@ -52,19 +52,19 @@ RSpec.describe Ruboty::AwsBlackBelt::ProfileStorage do
     before do
       robot.brain.data['Ruboty::AwsBlackBelt'] = {
         'whoami' => {
-          email: 'test@example.com',
-          first_name: '名',
-          last_name: '姓',
-          country: '日本',
-          zipcode: '123-4567',
-          phone: '090-1234-5678',
-          company: '株式会社テスト',
-          post: '社長',
-          business: 'ソフトウェア & インターネット',
-          job: '開発者/エンジニア',
-          usage: 'AWSでサービスを複数本番稼動させている',
-          schedule: ' 未定',
-          contact: 'false',
+          'email' => 'test@example.com',
+          'first_name' => '名',
+          'last_name' => '姓',
+          'country' => '日本',
+          'zipcode' => '123-4567',
+          'phone' => '090-1234-5678',
+          'company' => '株式会社テスト',
+          'post' => '社長',
+          'business' => 'ソフトウェア & インターネット',
+          'job' => '開発者/エンジニア',
+          'usage' => 'AWSでサービスを複数本番稼動させている',
+          'schedule' => ' 未定',
+          'contact' => 'false',
         }
       }
     end
