@@ -9,7 +9,7 @@ module Ruboty
 
       on /awsbb list/, name: 'show_schedule', description: 'Show AWS Black Belt schedule'
       on /awsbb profile\z/, name: 'show_profile', description: 'Show profile'
-      on /awsbb configure\n(.*)\z/m, name: 'configure', description: 'Configure personal informations to register webinar'
+      on /awsbb profile\n(?<profile>.*)\z/m, name: 'save_profile', description: 'Save profile'
       on /awsbb register (?<url>.*)/, name: 'register', description: 'Register webinar'
 
       FORM = {
@@ -44,9 +44,17 @@ module Ruboty
         message.reply(reply)
       end
 
-      def configure(message)
-        config = Hash[message[1].split("\n").map { |line| line.split("=", 2).map(&:strip) }]
-        robot.brain.data[BRAIN_KEY][message.from_name] = config
+      def save_profile(message)
+        reverse_table = Ruboty::AwsBlackBelt::Profile.reverse_translation_table
+
+        attributes = message['profile'].split(/[\r\n]+/).each_with_object({}) do |line, res|
+          k, v = line.split('=', 2).map(&:strip)
+          res[reverse_table[k]] = v
+        end
+
+        profile = Ruboty::AwsBlackBelt::Profile.new(message.from_name).tap { |profile| profile.assign_attributes(attributes) }
+        Ruboty::AwsBlackBelt::ProfileStorage.new(robot).save(profile)
+
         message.reply('done.')
       end
 

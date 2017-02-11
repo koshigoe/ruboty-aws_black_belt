@@ -108,4 +108,48 @@ EOF
       end
     end
   end
+
+  describe '#save_profile' do
+    subject { robot.receive(body: "#{robot.name} awsbb profile\n#{profile}", from_name: 'whoami') }
+
+    let(:profile) do
+      <<EOF.chomp
+電子メールアドレス = test@example.com
+名 = 名
+姓 = 姓
+国 = 日本
+郵便番号 = 123-4567
+勤務先お電話番号 = 090-1234-5678
+御社名・所属団体名 = 株式会社テスト
+お役職 = 社長
+業種 = ソフトウェア & インターネット
+職種 = 開発者/エンジニア
+AWS 利用度 = AWSでサービスを複数本番稼動させている
+クラウド導入の予定はいつですか？ = 未定
+オンラインセミナー後、AWS の日本担当チームからご連絡させていただいてもよろしいですか = false
+EOF
+    end
+
+    it 'save profile' do
+      expect(robot).to receive(:say).with(hash_including(body: 'done.'))
+      subject
+
+      expected = {
+        'email' => 'test@example.com',
+        'first_name' => '名',
+        'last_name' => '姓',
+        'country' => '日本',
+        'zipcode' => '123-4567',
+        'phone' => '090-1234-5678',
+        'company' => '株式会社テスト',
+        'post' => '社長',
+        'business' => 'ソフトウェア & インターネット',
+        'job' => '開発者/エンジニア',
+        'usage' => 'AWSでサービスを複数本番稼動させている',
+        'schedule' => '未定',
+        'contact' => 'false',
+      }
+      expect(robot.brain.data['Ruboty::AwsBlackBelt']['whoami']).to eq expected
+    end
+  end
 end
